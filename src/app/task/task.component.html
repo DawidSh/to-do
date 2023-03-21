@@ -1,0 +1,23 @@
+<div class="task">
+    <span [ngClass]="{'completed' :task.done }" class="taskdescription" [id]="task.description"
+        (click)="completeTask(task.done)">
+        <div ngFor="task.description">{{task.description}}</div>
+    </span>
+
+    <div *ngIf="!editable">
+        <button class="button1" (click)="editable = !editable"><fa-icon [icon]="faEdit"></fa-icon></button>
+        <button class="button1" (click)="deleteTask.emit()"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
+    </div>
+
+    <!-- This section shows only if user clicks Edit button -->
+    <div class="taskEdit" *ngIf="editable">
+        <input class="text" placeholder="edit task" [value]="task.description" #editedTask
+            (keyup.enter)="saveItem(editedTask.value)">
+
+
+        <button class="buttonSmall" (click)="editable = !editable"><fa-icon [icon]="faWindowClose"></fa-icon></button>
+        <button class="buttonSmall btn-save" (click)="saveItem(editedTask.value)"><fa-icon [icon]="faSave"></fa-icon></button>
+
+    </div>
+
+</div>
